@@ -10,9 +10,13 @@ bot.command('quit', (ctx) => {
     ctx.leaveChat()
 })
 
+/**
+ * COMMANDS
+ */
+
 bot.command("remind", (ctx) => {
-    console.log(ctx);
-    ctx.reply(`Yo`)
+    console.log(ctx.message.from);
+    ctx.reply(`Yo ${ctx.message.from.username}`)
 })
 
 bot.on('callback_query', (ctx) => {
