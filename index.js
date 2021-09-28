@@ -32,17 +32,8 @@ bot.command("remind", (ctx) => {
 
 bot.on('callback_query', (ctx) => {
     console.log(ctx.callbackQuery);
-    ctx.reply(`Du hast ID ${ctx.callbackQuery} mit Text ${ctx.callbackQuery} gedrückt`);
+    ctx.reply(`Du hast ID ${ctx.callbackQuery.message.data} gedrückt`);
     ctx.answerCbQuery()
-})
-
-bot.on('inline_query', (ctx) => {
-    const result = ["Ja", "Ne", "Lass Mal"]
-    // Explicit usage
-    ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result)
-
-    // Using context shortcut
-    ctx.answerInlineQuery(result)
 })
 
 bot.launch()
