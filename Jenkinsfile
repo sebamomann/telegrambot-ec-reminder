@@ -65,9 +65,8 @@ pipeline {
         stage('Start container') {
             steps {
                 script {
-                    echo TELEGRAMBOT_TOKEN
                     docker.withRegistry('http://localhost:34015') {
-                        sh "docker run ${image_name} -e \"TELEGRAM_API_TOKEN=${TELEGRAMBOT_TOKEN}\" ${img_name}"
+                        sh "docker run ${image_name} -e TELEGRAM_API_TOKEN=${TELEGRAMBOT_TOKEN}"
                     }
                 }
             }
