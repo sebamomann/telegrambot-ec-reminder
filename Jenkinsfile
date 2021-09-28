@@ -10,9 +10,6 @@ def image_name = 'telegrambots/telegrambot-ec-reminder:' + tag_name
 pipeline {
     agent any
 
-    environment {
-    }
-
     options {
         ansiColor('xterm')
     }
