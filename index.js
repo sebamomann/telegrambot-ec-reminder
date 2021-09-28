@@ -31,7 +31,8 @@ bot.command("remind", (ctx) => {
 })
 
 bot.on('callback_query', (ctx) => {
-    ctx.reply(`Du hast ID ${ctx.callbackQuery.id} mit Text ${ctx.callbackQuery.message} gedrückt`);
+    console.log(ctx.callbackQuery);
+    ctx.reply(`Du hast ID ${ctx.callbackQuery} mit Text ${ctx.callbackQuery} gedrückt`);
     ctx.answerCbQuery()
 })
 
