@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('http://localhost:34015') {
-                        sh "docker run ${image_name} --name ${name} -d"
+                        sh "docker run -n ${name} ${image_name} -d"
                     }
                 }
             }
