@@ -5,7 +5,8 @@ def commit_hash
 
 def tag_name = 'jb_' + branch_name + "_" + build_number
 
-def image_name = 'telegrambots/telegrambot-ec-reminder:' + tag_name
+def img_name = 'telegrambots/telegrambot-ec-reminder';
+def image_name = img_name + ":" + tag_name
 
 pipeline {
     agent any
@@ -65,7 +66,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('http://localhost:34015') {
-                        sh "docker run ${image_name} ${image_name} -e TELEGRAM_API_TOKEN=${TELEGRAMBOT_TOKEN}"
+                        sh "docker run ${image_name} -e TELEGRAM_API_TOKEN=${TELEGRAMBOT_TOKEN} -t ${img_name}"
                     }
                 }
             }
