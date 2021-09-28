@@ -9,4 +9,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 8080
-CMD node -r dotenv/config index.js
+CMD npm run-script start
