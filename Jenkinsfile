@@ -68,7 +68,7 @@ pipeline {
                 script {
                     docker.withRegistry('http://localhost:34015') {
                         try {
-                            sh "docker rm ${name}"
+                            sh "docker rm ${name} -f"
                         } catch (err) {
                             echo "cant remove container - it does not exist"
                         }
