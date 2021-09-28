@@ -17,6 +17,9 @@ bot.command('quit', (ctx) => {
 bot.command("remind", (ctx) => {
     console.log(ctx.message.from);
     ctx.reply(`Yo ${ctx.message.from.username}`)
+    const result = ["Ja", "Ne", "Lass Mal"]
+    // Explicit usage
+    ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result);
 })
 
 bot.on('callback_query', (ctx) => {
@@ -28,7 +31,7 @@ bot.on('callback_query', (ctx) => {
 })
 
 bot.on('inline_query', (ctx) => {
-    const result = []
+    const result = ["Ja", "Ne", "Lass Mal"]
     // Explicit usage
     ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result)
 
