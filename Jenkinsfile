@@ -63,9 +63,7 @@ pipeline {
 
         stage('Start container') {
             steps {
-                sh '''
-                docker run ${image_name} ${image_name} -e TELEGRAM_API_TOKEN=${TELEGRAMBOT_TOKEN}
-                '''
+                sh "docker run ${image_name} ${image_name} -e TELEGRAM_API_TOKEN=${TELEGRAMBOT_TOKEN}"
             }
         }
     }
