@@ -69,7 +69,7 @@ pipeline {
                     docker.withRegistry('http://localhost:34015') {
                         try {
                             sh "docker rm ${name}"
-                        } catch {
+                        } catch (err) {
                             echo "cant remove container - it does not exist"
                         }
                         sh "docker run --name ${name} -d -e BOT_API_TOKEN=$TELEGRAMBOT_TOKEN ${image_name}"
