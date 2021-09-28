@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('http://localhost:34015') {
-                        sh "docker run --name ${name} -d ${image_name}"
+                        sh "docker run --name ${name} -d -e BOT_API_TOKEN=TELEGRAMBOT_TOKEN ${image_name}"
                     }
                 }
             }
