@@ -1,6 +1,6 @@
-import * as  telegraf from 'telegraf'
+import { Telegraf, Markup } from 'telegraf'
 
-const bot = new telegraf.Telegraf(process.env.BOT_API_TOKEN)
+const bot = new Telegraf(process.env.BOT_API_TOKEN)
 
 bot.command('quit', (ctx) => {
     // Explicit usage
@@ -15,11 +15,23 @@ bot.command('quit', (ctx) => {
  */
 
 bot.command("remind", (ctx) => {
-    console.log(ctx.message.from);
     ctx.reply(`Yo ${ctx.message.from.username}`)
-    const result = ["Ja", "Ne", "Lass Mal"]
-    // Explicit usage
-    ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result);
+
+    const recipes = [{
+        type: 'article',
+        id: 1,
+        title: "mama",
+        description: "descr",
+        thumb_url: "https://google.com",
+        input_message_content: {
+            message_text: "mama"
+        },
+        reply_markup: Markup.inlineKeyboard([
+            Markup.button.url('Go to recipe', "https://sebamomann.de")
+        ])
+    }]
+
+    return await ctx.answerInlineQuery(recipes)
 })
 
 bot.on('callback_query', (ctx) => {
