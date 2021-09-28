@@ -17,21 +17,11 @@ bot.command('quit', (ctx) => {
 bot.command("remind", (ctx) => {
     ctx.reply(`Yo ${ctx.message.from.username}`)
 
-    const recipes = [{
-        type: 'article',
-        id: 1,
-        title: "mama",
-        description: "descr",
-        thumb_url: "https://google.com",
-        input_message_content: {
-            message_text: "mama"
-        },
-        reply_markup: Markup.inlineKeyboard([
-            Markup.button.url('Go to recipe', "https://sebamomann.de")
+    ctx.reply('Moin',
+        Markup.keyboard([
+            ['Items', 'Lol']
         ])
-    }]
-
-    ctx.answerInlineQuery(recipes)
+    )
 })
 
 bot.on('callback_query', (ctx) => {
