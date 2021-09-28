@@ -1,7 +1,6 @@
 import * as  telegraf from 'telegraf'
 
 const bot = new telegraf.Telegraf(process.env.BOT_API_TOKEN)
-console.log(process.env.BOT_API_TOKEN)
 
 bot.command('quit', (ctx) => {
     // Explicit usage
@@ -17,6 +16,11 @@ bot.on('text', (ctx) => {
 
     // Using context shortcut
     ctx.reply(`Hello ${ctx.state.role}`)
+})
+
+bot.command("remind", (ctx) => {
+    console.log(ctx);
+    ctx.reply(`Yo`)
 })
 
 bot.on('callback_query', (ctx) => {
