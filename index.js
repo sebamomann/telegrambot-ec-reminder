@@ -16,11 +16,18 @@ bot.command('quit', (ctx) => {
 
 bot.command("remind", (ctx) => {
     ctx.reply(`Yo ${ctx.message.from.username}`)
+    var options = {
+        reply_markup: JSON.stringify({
+            inline_keyboard: [
+                [{ text: 'Some button text 1', callback_data: '1' }],
+                [{ text: 'Some button text 2', callback_data: '2' }],
+                [{ text: 'Some button text 3', callback_data: '3' }]
+            ]
+        })
+    };
 
     ctx.reply('Moin',
-        Markup.keyboard([
-            ['Items', 'Lol']
-        ])
+        options
     )
 })
 
