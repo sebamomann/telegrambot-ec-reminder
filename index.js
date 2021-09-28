@@ -1,6 +1,6 @@
-import { Telegraf } from 'telegraf'
+import * as  telegraf from 'telegraf'
 
-const bot = new Telegraf(process.env.BOT_API_TOKEN)
+const bot = new telegraf.Telegraf(process.env.BOT_API_TOKEN)
 
 bot.command('quit', (ctx) => {
     // Explicit usage
