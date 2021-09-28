@@ -14,7 +14,7 @@ bot.command('quit', (ctx) => {
  * COMMANDS
  */
 
-bot.on("command", (ctx) => {
+bot.on("text", (ctx) => {
     console.log(ctx);
 })
 
