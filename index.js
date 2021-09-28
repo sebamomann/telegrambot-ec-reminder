@@ -31,10 +31,7 @@ bot.command("remind", (ctx) => {
 })
 
 bot.on('callback_query', (ctx) => {
-    // Explicit usage
-    ctx.telegram.answerCbQuery(ctx.callbackQuery.id)
-
-    // Using context shortcut
+    ctx.reply(`Du hast ID ${ctx.callbackQuery.id} mit Text ${ctx.callbackQuery.message} gedrückt`);
     ctx.answerCbQuery()
 })
 
