@@ -10,14 +10,6 @@ bot.command('quit', (ctx) => {
     ctx.leaveChat()
 })
 
-bot.on('text', (ctx) => {
-    // Explicit usage
-    ctx.telegram.sendMessage(ctx.message.chat.id, `Hello ${ctx.state.role}`)
-
-    // Using context shortcut
-    ctx.reply(`Hello ${ctx.state.role}`)
-})
-
 bot.command("remind", (ctx) => {
     console.log(ctx);
     ctx.reply(`Yo`)
