@@ -31,7 +31,7 @@ bot.command("remind", (ctx) => {
         ])
     }]
 
-    return await ctx.answerInlineQuery(recipes)
+    ctx.answerInlineQuery(recipes)
 })
 
 bot.on('callback_query', (ctx) => {
