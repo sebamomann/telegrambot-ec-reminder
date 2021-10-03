@@ -32,9 +32,9 @@ export async function saveUserIfNotExists(ctx) {
 
 export async function createNewUser(ctx) {
     var id = ctx.message.from.id;
-    var first_name = ctx.message.from.first_name;
-    var last_name = ctx.message.from.last_name;
-    var username = ctx.message.from.username;
+    var first_name = ctx.message.from.first_name || null;
+    var last_name = ctx.message.from.last_name || null;
+    var username = ctx.message.from.username || null;
     var language = ctx.message.from.language_code;
 
     var sql = 'INSERT INTO account (id, first_name, last_name, username, language) VALUES (?, ?, ?, ?, ?)';
@@ -52,9 +52,9 @@ export async function createNewUser(ctx) {
 
 export async function updateUserById(ctx) {
     var id = ctx.message.from.id;
-    var first_name = ctx.message.from.first_name;
-    var last_name = ctx.message.from.last_name;
-    var username = ctx.message.from.username;
+    var first_name = ctx.message.from.first_name || null;
+    var last_name = ctx.message.from.last_name || null;
+    var username = ctx.message.from.username || null;
     var language = ctx.message.from.language_code;
 
     var sql = 'UPDATE account SET first_name=?, last_name=?, username=?, language=? WHERE id=?';

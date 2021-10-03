@@ -120,6 +120,7 @@ bot.on('callback_query', async (ctx, next) => {
         }
     } catch (e) {
         ctx.reply("Sorry, dass kann ich noch nicht.")
+        ctx.answerCbQuery();
     }
 
     ctx.answerCbQuery();
