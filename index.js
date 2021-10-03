@@ -65,6 +65,8 @@ if (ctx.message.entities && ctx.message.entities[0].type === "bot_command") {
 */
 
 bot.command("remind", (ctx, next) => {
+    ctx.session = null;
+
     console.log("COMMAND");
     events.init(ctx);
 });
