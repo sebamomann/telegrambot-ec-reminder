@@ -53,7 +53,7 @@ export const event = async (ctx, eventId, isEdit = false) => {
     const keyboardBack = [];
 
     keyboardRow1.push({ text: "Neue Erinnerung", callback_data: CALLBACK_PREFIX_REMINDERCREATE + eventId })
-    if (reminders.length > 1) {
+    if (reminders.length >= 1) {
         keyboardRow1.push({ text: "Meine Erinnerungen", callback_data: CALLBACK_PREFIX_REMINDERLIST + eventId })
     }
 

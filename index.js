@@ -1,8 +1,10 @@
-import { Telegraf, Markup } from 'telegraf'
+import { Telegraf } from 'telegraf'
 import LocalSession from 'telegraf-session-local'
+import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
+
 import * as events from './commands/events.js'
 import * as reminder from './commands/reminder.js'
-import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
+
 
 const bot = new Telegraf(process.env.BOT_API_TOKEN);
 
@@ -75,16 +77,22 @@ bot.on("text", async (ctx, next) => {
         const command_function = actionSplit[1];
         const command_id = ctx.session.nextActionData;
 
-        if (command === "events") {
-            await events[command_function](ctx, command_id, true);
-        } else if (command === "reminder") {
-            await reminder[command_function](ctx, command_id, true);
-        } else {
-            ctx.reply("Sorry, kenn ich nicht!")
+        try {
+            if (command === "events") {
+                await events[command_function](ctx, command_id, true);
+            } else if (command === "reminder") {
+                await reminder[command_function](ctx, command_id, true);
+            } else {
+                ctx.reply("Ja ne, das is ein Problem!")
+            }
+        } catch (e) {
+            ctx.reply("Sorry, dass kann ich noch nicht.")
         }
     } else {
-        ctx.reply("Sorry, kenn ich nicht! lele")
+        ctx.reply("Sorry, damit kann ich aktuell nichts anfangen.")
     }
+
+    ctx.answerCbQuery();
 });
 
 bot.on('callback_query', async (ctx, next) => {
@@ -95,13 +103,19 @@ bot.on('callback_query', async (ctx, next) => {
     const callback_function = callback_parts[2];
     const callback_id = callback_parts[3];
 
-    if (callback_command === "events") {
-        await events[callback_function](ctx, callback_id, true);
-    } else if (callback_command === "reminder") {
-        await reminder[callback_function](ctx, callback_id, true);
-    } else {
-        ctx.reply("Sorry, kenn ich nicht!")
+    try {
+        if (callback_command === "events") {
+            await events[callback_function](ctx, callback_id, true);
+        } else if (callback_command === "reminder") {
+            await reminder[callback_function](ctx, callback_id, true);
+        } else {
+            ctx.reply("Sorry, kenn ich nicht!")
+        }
+    } catch (e) {
+        ctx.reply("Sorry, dass kann ich noch nicht.")
     }
+
+    ctx.answerCbQuery();
 })
 
 bot.launch()
