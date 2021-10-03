@@ -71,6 +71,13 @@ bot.command("remind", (ctx, next) => {
     events.init(ctx);
 });
 
+bot.command("help", (ctx, next) => {
+    ctx.session = null;
+
+    console.log("HELP");
+    ctx.reply("Grad geht nur /remind")
+});
+
 bot.on("text", async (ctx, next) => {
     if (ctx.session.nextAction) {
         const nextAction = ctx.session.nextAction
@@ -93,8 +100,6 @@ bot.on("text", async (ctx, next) => {
     } else {
         ctx.reply("Sorry, damit kann ich aktuell nichts anfangen.")
     }
-
-    ctx.answerCbQuery();
 });
 
 bot.on('callback_query', async (ctx, next) => {
