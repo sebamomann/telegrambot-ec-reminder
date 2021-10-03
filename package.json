@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node -r dotenv/config /usr/src/app/index.js"
+    "start": "node -r dotenv/config index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,8 @@
   "homepage": "https://github.com/sebamomann/telegrambot-ec-reminder#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "telegraf": "^4.4.2"
+    "mysql2": "^2.3.0",
+    "telegraf": "^4.4.2",
+    "telegraf-session-local": "^2.1.0"
   }
 }
