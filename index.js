@@ -5,7 +5,6 @@ import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
 import * as events from './commands/events.js'
 import * as reminder from './commands/reminder.js'
 
-
 const bot = new Telegraf(process.env.BOT_API_TOKEN);
 
 const localSession = new LocalSession({
@@ -25,49 +24,17 @@ bot.use(localSession.middleware("session"))
 
 startConnection();
 
-bot.command('start', (ctx, next) => {
-    saveUserIfNotExists(ctx);
-    next();
-})
-
-bot.command('quit', (ctx, next) => {
-    // Explicit usage
-    ctx.telegram.leaveChat(ctx.message.chat.id)
-
-    // Using context shortcut
-    ctx.leaveChat();
-
-    next();
-})
-
-/**
- * COMMANDS
- */
-/*
-if (ctx.message.entities && ctx.message.entities[0].type === "bot_command") {
+bot.on("text", async (ctx, next) => {
+    if (ctx.message.entities && ctx.message.entities[0].type === "bot_command") {
         const commandName = ctx.message.text.substring(1);
         console.log(`Calling command ${commandName}`);
-        this[commandName](ctx);
-    } else {
-        ctx.reply("Is no command");
+
+        handleCommand(commandName, ctx);
+
+        return;
     }
-*/
 
-bot.command("remind", (ctx, next) => {
-    ctx.session = null;
 
-    console.log("COMMAND");
-    events.init(ctx);
-});
-
-bot.command("help", (ctx, next) => {
-    ctx.session = null;
-
-    console.log("HELP");
-    ctx.reply("Grad geht nur /remind")
-});
-
-bot.on("text", async (ctx, next) => {
     if (ctx.session.nextAction) {
         const nextAction = ctx.session.nextAction
         const actionSplit = nextAction.split("/");
@@ -120,3 +87,22 @@ bot.launch()
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
+
+function handleCommand(commandName, ctx) {
+    ctx.session = null;
+
+    if (commandName === "remind") {
+        events.init(ctx);
+    } else if (commandName === "help") {
+        ctx.reply("Grad geht nur /remind")
+    } else if (commandName === "start") {
+        saveUserIfNotExists(ctx);
+    } else if (commandName === "quit") {
+        ctx.reply("Alles klar, bye!");
+        ctx.telegram.leaveChat(ctx.message.chat.id)
+        ctx.leaveChat();
+    } else {
+        ctx.reply("Sorry, dieses Kommando kenne ich nciht. Sende mit /help um eine Liste an verfügbaren kommandos zu erhalten")
+    }
+};
