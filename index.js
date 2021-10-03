@@ -8,7 +8,7 @@ const bot = new Telegraf(process.env.BOT_API_TOKEN);
 
 const localSession = new LocalSession({
     // Database name/path, where sessions will be located (default: 'sessions.json')
-    database: 'example_db.json',
+    database: 'session_db.json',
     // Name of session property object in Telegraf Context (default: 'session')
     property: 'session',
     // Type of lowdb storage (default: 'storageFileSync')
