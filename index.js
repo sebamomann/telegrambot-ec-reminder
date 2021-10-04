@@ -5,6 +5,9 @@ import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
 import * as events from './commands/events.js'
 import * as reminder from './commands/reminder.js'
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 const bot = new Telegraf(process.env.BOT_API_TOKEN);
 
 const localSession = new LocalSession({
