@@ -1,4 +1,4 @@
-import { parseTimespan, secondsToTime } from "../distance_parser.js";
+import { timeInputToSeconds, secondsToTimeObject } from "../distance_parser.js";
 import * as db from "../mysql_requests.js";
 
 export const init = async (ctx, isEdit = false) => {
@@ -31,15 +31,15 @@ export const create_save = async (ctx, eventId, isEdit = false) => {
 
     console.log(`Saving reminder for event ${eventId}`);
 
-    const secondsBefore = parseTimespan(ctx.message.text);
+    const secondsBefore = timeInputToSeconds(ctx.message.text);
     if (secondsBefore === 0) {
         ctx.reply("Das hat nicht geklappt. Bitte gebe eine korrekte Zeitangabe an!");
     } else {
         await db.getEventById(eventId);
         await db.saveReminder(eventId, ctx.message.from.id, secondsBefore);
 
-        var message = "Cool, das war's. Ich werde dich in ";
-        const timeObj = secondsToTime(secondsBefore);
+        var message = "Cool, das war's. Ich werde dich ";
+        const timeObj = secondsToTimeObject(secondsBefore);
 
         if (timeObj.d) {
             message += (timeObj.d === 1 ? (timeObj.d + " Tag ") : (timeObj.d + " Tagen "));
@@ -53,7 +53,7 @@ export const create_save = async (ctx, eventId, isEdit = false) => {
             message += (timeObj.m === 1 ? (timeObj.m + " Minute ") : (timeObj.m + " Minuten "));
         }
 
-        message += `an das Event **${event.name}** erinnern!`;
+        message += `vorher an das Event **${event.name}** erinnern!`;
 
         ctx.reply(message, { parse_mode: "Markdown" });
 

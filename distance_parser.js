@@ -1,7 +1,4 @@
-export function parseTimespan(input) {
-    // CAUTION: On its own, this pattern does not require the input to only
-    // contain tokens that can be matched by this pattern. Depending on how hard
-    // you squint, this can be a good or bad thing.
+export function timeInputToSeconds(input) {
     var pattern = /(\d+)(d|h|m)/g;
     var multiplier = {
         d: 86400,
@@ -26,7 +23,7 @@ export function parseTimespan(input) {
 }
 
 
-export function secondsToTime(inputSeconds) {
+export function secondsToTimeObject(inputSeconds) {
     const secondsInAMinute = 60;
     const secondsInAnHour = 60 * secondsInAMinute;
     const secondsInADay = 24 * secondsInAnHour;
@@ -50,4 +47,24 @@ export function secondsToTime(inputSeconds) {
     };
 
     return obj;
+}
+
+export function secondsToTimeString(inputSeconds) {
+    const timeObj = secondsToTimeObject(inputSeconds);
+
+    var timeString = "";
+
+    if (timeObj.d) {
+        timeString += (timeObj.d === 1 ? (timeObj.d + " Tag ") : (timeObj.d + " Tagen "));
+    }
+
+    if (timeObj.h) {
+        timeString += (timeObj.h === 1 ? (timeObj.h + " Stunde ") : (timeObj.h + " Stunden "));
+    }
+
+    if (timeObj.m) {
+        timeString += (timeObj.m === 1 ? (timeObj.m + " Minute ") : (timeObj.m + " Minuten "));
+    }
+
+    return timeString;
 }

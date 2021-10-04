@@ -4,6 +4,7 @@ import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
 
 import * as events from './commands/events.js'
 import * as reminder from './commands/reminder.js'
+import * as myReminders from './commands/myReminders.js'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -69,15 +70,24 @@ bot.on('callback_query', async (ctx, next) => {
     const callback_function = callback_parts[2];
     const callback_id = callback_parts[3];
 
+    console.log(callback_data);
+
     try {
         if (callback_command === "events") {
             await events[callback_function](ctx, callback_id, true);
         } else if (callback_command === "reminder") {
             await reminder[callback_function](ctx, callback_id, true);
+        } else if (callback_command === "myReminders") {
+            if (callback_function === "init") {
+                await myReminders[callback_function](ctx, true);
+            } else {
+                await myReminders[callback_function](ctx, callback_id, true);
+            }
         } else {
             ctx.reply("Sorry, kenn ich nicht!")
         }
     } catch (e) {
+        console.log(e);
         ctx.reply("Sorry, dass kann ich noch nicht.")
         ctx.answerCbQuery();
     }
@@ -101,11 +111,13 @@ function handleCommand(commandName, ctx) {
         ctx.reply("Grad geht nur /remind")
     } else if (commandName === "start") {
         saveUserIfNotExists(ctx);
+    } else if (commandName === "myReminders") {
+        myReminders.init(ctx);
     } else if (commandName === "quit") {
         ctx.reply("Alles klar, bye!");
         ctx.telegram.leaveChat(ctx.message.chat.id)
         ctx.leaveChat();
     } else {
-        ctx.reply("Sorry, dieses Kommando kenne ich nciht. Sende mit /help um eine Liste an verfügbaren kommandos zu erhalten")
+        ctx.reply("Sorry, dieses Kommando kenne ich nicht. Sende mit /help um eine Liste an verfügbaren kommandos zu erhalten")
     }
 };

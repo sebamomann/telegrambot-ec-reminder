@@ -1,6 +1,6 @@
 import * as mysql from 'mysql2/promise';
 
-var con;
+export var con;
 
 export async function startConnection() {
     try {
@@ -77,7 +77,11 @@ export async function getAllEvents() {
 
     return results;
 }
-
+/**
+ * @deprecated
+ * @param {*} eventId 
+ * @returns 
+ */
 export async function getEventById(eventId) {
     var sql = 'SELECT * FROM event WHERE id = ?';
 
