@@ -5,12 +5,6 @@ import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
 import * as events from './commands/events.js'
 import * as reminder from './commands/reminder.js'
 
-console.log(process.env.BOT_API_TOKEN);
-console.log(process.env.MYSQL_PASSWORD);
-console.log(process.env.MYSQL_URL);
-console.log(process.env.MYSQL_USER);
-console.log(process.env.MYSQL_DB);
-
 const bot = new Telegraf(process.env.BOT_API_TOKEN);
 
 const localSession = new LocalSession({
