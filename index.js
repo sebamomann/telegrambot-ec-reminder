@@ -120,8 +120,8 @@ function handleCommand(commandName, ctx) {
     ctx.session = null;
 
     if (commandName === "help") {
-        ctx.reply(`/myReminders Bearbeite deine Erinnerungen
-/newReminder Erstelle neue Erinnerungen`)
+        ctx.reply(`/myreminders Bearbeite deine Erinnerungen
+/newreminder Erstelle neue Erinnerungen`)
     } else if (commandName === "start") {
         saveUserIfNotExists(ctx);
     } else if (commandName === "myreminders") {
