@@ -119,9 +119,7 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'))
 function handleCommand(commandName, ctx) {
     ctx.session = null;
 
-    if (commandName === "remind") {
-        events.init(ctx);
-    } else if (commandName === "help") {
+    if (commandName === "help") {
         ctx.reply(`/myReminders Bearbeite deine Erinnerungen
 /newReminder Erstelle neue Erinnerungen`)
     } else if (commandName === "start") {
