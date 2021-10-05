@@ -126,7 +126,7 @@ function handleCommand(commandName, ctx) {
         saveUserIfNotExists(ctx);
     } else if (commandName === "myreminders") {
         myReminders.init(ctx);
-    } else if (commandName === "myreminders") {
+    } else if (commandName === "newreminder") {
         newReminder.init(ctx);
     } else if (commandName === "quit") {
         ctx.reply("Alles klar, bye!");

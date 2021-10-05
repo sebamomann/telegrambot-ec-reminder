@@ -5,6 +5,7 @@ import { createKeyboardArrayWithWidthOf } from '../keyboard_util.js';
 import { sendMessage } from '../send_util.js';
 import { secondsToTimeString, timeInputToSeconds } from '../distance_parser.js';
 import { parseUserIdFromContext } from '../context_util.js';
+import { getRandomInt } from '../math_util.js'
 
 const time_sticker_raw = fs.readFileSync('./time_sticker.json');
 const time_sticker = JSON.parse(time_sticker_raw);
