@@ -122,12 +122,13 @@ function handleCommand(commandName, ctx) {
     if (commandName === "remind") {
         events.init(ctx);
     } else if (commandName === "help") {
-        ctx.reply("Grad geht nur /remind")
+        ctx.reply(`/myReminders Bearbeite deine Erinnerungen
+/newReminder Erstelle neue Erinnerungen`)
     } else if (commandName === "start") {
         saveUserIfNotExists(ctx);
-    } else if (commandName === "myReminders") {
+    } else if (commandName === "myreminders") {
         myReminders.init(ctx);
-    } else if (commandName === "newReminder") {
+    } else if (commandName === "myreminders") {
         newReminder.init(ctx);
     } else if (commandName === "quit") {
         ctx.reply("Alles klar, bye!");

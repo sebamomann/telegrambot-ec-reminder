@@ -72,7 +72,7 @@ export const createReminderSave = async (ctx, eventId, isEdit = false) => {
             await db_reminder.createReminder(eventId, parseUserIdFromContext(ctx), secondsBefore);
 
             const humanReadableDistance = secondsToTimeString(secondsBefore).trim();
-            var message = `Cool, das war's. Ich werde dich ***${humanReadableDistance}*** vorher an das Event ***${event.name}*** erinnern! Du kannst mit /myReminders deine aktuellen Erinnerungen einsehen.`;
+            var message = `Cool, das war's. Ich werde dich ***${humanReadableDistance}*** vorher an das Event ***${event.name}*** erinnern! Du kannst mit /myreminders deine aktuellen Erinnerungen einsehen.`;
             ctx.reply(message, { parse_mode: "Markdown" });
         } catch (e) {
             console.log("[SQL - ERROR] (createReminderSave)");
