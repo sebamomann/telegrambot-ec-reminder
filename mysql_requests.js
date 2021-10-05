@@ -41,11 +41,6 @@ export async function createNewUser(ctx) {
 
     const [result] = await con.execute(sql, [id, first_name, last_name, username, language]);
 
-    // if (err) {
-    //     console.log("[SQL] Could not create new user. Reason: " + err);
-    //     return;
-    // }
-
     console.log("[SQL] Inserted new user with username '" + username + "'");
     ctx.reply(`Hi ${first_name} ${last_name}. Ich bin dein persönlicher Erinnerungs-Bot für die Events des EC-Heidelsheim. Um zu sehen was ich kann, sende mir /help`);
 }
@@ -61,52 +56,6 @@ export async function updateUserById(ctx) {
 
     const [result] = await con.execute(sql, [first_name, last_name, username, language, id]);
 
-    // if (err) {
-    //     console.log("Could not update user. Reason: " + err);
-    //     return;
-    // }
-
     console.log("[SQL] Updated user with username '" + username + "'");
     ctx.reply(`Hi ${first_name} ${last_name}. Ich kenne dich bereits, leg' los! Wenn du nicht weißt wie, dann sende mir /help`);
-}
-
-export async function getAllEvents() {
-    var sql = 'SELECT * FROM event';
-
-    const [results] = await con.execute(sql);
-
-    return results;
-}
-/**
- * @deprecated
- * @param {*} eventId 
- * @returns 
- */
-export async function getEventById(eventId) {
-    var sql = 'SELECT * FROM event WHERE id = ?';
-
-    const [results] = await con.execute(sql, [eventId]);
-
-    return results[0];
-}
-
-export async function getRemindersByEventIdAndUserId(eventId, userId) {
-    var sql = 'SELECT * FROM reminder WHERE eventId = ? AND userId = ?';
-
-    const [results] = await con.execute(sql, [eventId, userId]);
-
-    return results;
-}
-
-export async function saveReminder(eventId, userId, distance) {
-    var sql = 'INSERT INTO reminder (userId, eventId, distance) VALUES (?, ?, ?)';
-
-    const [result,] = await con.execute(sql, [userId, eventId, distance]);
-
-    // if (err) {
-    //     console.log("[SQL] Could not crete new reminder. Reason: " + err);
-    //     return;
-    // }
-
-    console.log("[SQL] Inserted new reminder with distance '" + distance + "'");
 }

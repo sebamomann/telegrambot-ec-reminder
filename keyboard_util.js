@@ -13,9 +13,7 @@ export function createKeyboardArrayWithWidthOf(width, elements) {
         }
     }
 
-    if (i % width !== 0) {
-        outputArray.push([...currentArray]);
-    }
+    outputArray.push([...currentArray]);
 
     return [...outputArray];
 }
