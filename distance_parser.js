@@ -55,7 +55,7 @@ export function secondsToTimeString(inputSeconds) {
     var timeString = "";
 
     if (timeObj.d) {
-        timeString += (timeObj.d === 1 ? (timeObj.d + " Tag ") : (timeObj.d + " Tagen "));
+        timeString += (timeObj.d === 1 ? (timeObj.d + " Tag ") : (timeObj.d + " Tage "));
     }
 
     if (timeObj.h) {
