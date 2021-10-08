@@ -1,4 +1,4 @@
-import { con } from './mysql_requests.js'
+import { pool } from './mysql_connection.js'
 
 export async function getAllEvents() {
     var sql = 'SELECT * FROM event';
@@ -6,7 +6,7 @@ export async function getAllEvents() {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql,);
+        [results, fields] = await pool.execute(sql,);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch all events");
         console.log("[SQL - ERROR] Reason: " + e)
@@ -22,7 +22,7 @@ export async function getEventsThatHaveRemindersSetByUser(userId) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [userId]);
+        [results, fields] = await pool.execute(sql, [userId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch events that have reminders set by user");
         console.log("[SQL - ERROR] Reason: " + e)
@@ -38,7 +38,7 @@ export async function getEventById(eventId) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [eventId]);
+        [results, fields] = await pool.execute(sql, [eventId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch event by id");
         console.log("[SQL - ERROR] Reason: " + e)

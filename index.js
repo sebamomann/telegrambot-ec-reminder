@@ -1,6 +1,6 @@
 import { Telegraf } from 'telegraf'
+import { saveUserIfNotExists } from './mysql_requests.js'
 import LocalSession from 'telegraf-session-local'
-import { startConnection, saveUserIfNotExists } from './mysql_requests.js'
 
 import * as myReminders from './commands/myReminders.js'
 import * as newReminder from './commands/newReminder.js'
@@ -24,8 +24,6 @@ const localSession = new LocalSession({
 
 // Telegraf will use `telegraf-session-local` configured above middleware with overrided `property` name
 bot.use(localSession.middleware("session"))
-
-startConnection();
 
 bot.on("sticker", async (ctx, next) => {
     ctx.reply(ctx.message.sticker.file_id);

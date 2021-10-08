@@ -23,7 +23,7 @@ export const init = async (ctx, isEdit = false) => {
     if (events.length === 0) {
         const messageText = `Du hast aktuell für keine Termine Erinnerungen gesetzt.
 
-Lege mit /newReminder neue Erinnerungen an.`
+Lege mit /newreminder neue Erinnerungen an.`
         ctx.reply(messageText)
         return;
     }

@@ -1,4 +1,4 @@
-import { con } from './mysql_requests.js'
+import { pool } from './mysql_connection.js'
 
 export async function createReminder(eventId, userId, distance) {
     var sql = 'INSERT INTO reminder (userId, eventId, distance) VALUES (?, ?, ?)';
@@ -6,7 +6,7 @@ export async function createReminder(eventId, userId, distance) {
     var result, field;
 
     try {
-        [result, field] = await con.execute(sql, [userId, eventId, distance]);
+        [result, field] = await pool.execute(sql, [userId, eventId, distance]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not create reminder");
         console.log("[SQL - ERROR] Reason: " + err)
@@ -21,7 +21,7 @@ export async function getRemindersByEventIdAndUser(eventId, userId) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [eventId, userId]);
+        [results, fields] = await pool.execute(sql, [eventId, userId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch reminders by event and user");
         console.log("[SQL - ERROR] Reason: " + err)
@@ -37,7 +37,7 @@ export async function getReminderById(reminderId) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [reminderId]);
+        [results, fields] = await pool.execute(sql, [reminderId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch reminder by id");
         console.log("[SQL - ERROR] Reason: " + e)
@@ -53,7 +53,7 @@ export async function getReminderJoinEventById(reminderId) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [reminderId]);
+        [results, fields] = await pool.execute(sql, [reminderId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch reminder join event by id");
         console.log("[SQL - ERROR] Reason: " + e)
@@ -69,7 +69,7 @@ export async function updateReminderDistanceById(reminderId, userId, distance) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [distance, reminderId, userId]);
+        [results, fields] = await pool.execute(sql, [distance, reminderId, userId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not fetch reminder join event by id");
         console.log("[SQL - ERROR] Reason: " + e)
@@ -85,7 +85,7 @@ export async function deleteReminderById(reminderId, userId) {
     var results, fields;
 
     try {
-        [results, fields] = await con.execute(sql, [reminderId, userId]);
+        [results, fields] = await pool.execute(sql, [reminderId, userId]);
     } catch (e) {
         console.log("[SQL - ERROR] Could not delete reminder by id");
         console.log("[SQL - ERROR] Reason: " + e)
